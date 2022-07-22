@@ -1,0 +1,76 @@
+#1 solution
+
+solution = Array.new(4) { rand(1..6) }
+puts solution
+if solution.any?{ |e| solution.count(e) > 2 }
+    solution = Array.new(4) { rand(1..6) }
+    puts solution
+end
+
+#2 Ask input
+
+player_guess = gets.chomp
+player_array = player_guess.split("").map(&:to_i)
+
+#3a Match input with solution - feedback (white indicator)
+#i.e no. of correct number in correct position
+solution = [1,2,3,4]
+player_array = [1,5,5,4]
+#match first index of 2 arrays, +1 to white counter if true.
+
+diff = player_array.map.with_index { |e,i| e == solution[i] }
+white_counter = diff.count(true)
+
+#3b Match input with solution - feedback (red indicator)
+#i.e no. of correct number in wrong position
+
+#match first index of 2 arrays, if false, next step
+#find number in solution array. +1 to red counter if true.
+false_elements = diff.each_index.select { |i| !diff[i] }
+j = 0
+red_counter = 0
+false_elements.size.times do
+    if j<false_elements.size
+        if solution.include?(player_array[false_elements[j]])
+            red_counter += 1
+        end
+    end
+    j += 1
+end
+puts red_counter
+
+#3c Game loop
+
+solution = Array.new(4) { rand(1..6) }
+print solution
+    if solution.any?{ |e| solution.count(e) > 2 }
+        solution = Array.new(4) { rand(1..6) }
+        print solution
+    end
+9.times do
+    player_guess = gets.chomp
+    player_array = player_guess.split("").map(&:to_i)
+    
+    diff = player_array.map.with_index { |e,i| e == solution[i] }
+    white_counter = diff.count(true)
+    false_elements = diff.each_index.select { |i| !diff[i] }
+    j = 0
+    red_counter = 0
+    false_elements.size.times do
+        if j<false_elements.size
+            if solution.include?(player_array[false_elements[j]])
+                    red_counter += 1
+            end
+        end
+        j += 1
+    end
+    puts red_counter
+    if diff.all?(true)
+        print "You won!"
+    elsif white_counter>0
+        print "#{white_counter} are correct, but #{red_counter} are in wrong position."
+    else
+        print "You lose!"
+    end
+end
+
