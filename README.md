@@ -1,8 +1,7 @@
 # Mastermind
 A game like wordle but using numbers
 
-Using OOP to build a gueirb
-ssing game by choosing 4 digit number each turn. After each turn you will get a hint if there were correct digit in the guess.
+Using OOP to build a guessing game by choosing 4 digit number each turn. After each turn you will get a hint if there were correct digit in the guess.
 
 
 1 #Computer generate random 4 digit solution 
